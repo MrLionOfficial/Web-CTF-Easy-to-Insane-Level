@@ -1,0 +1,98 @@
+version: '3.8'
+
+services:
+  # Lab 1: PHP Blog Application (Port 5001)
+  lab-1-php-blog:
+    build: ./lab-1-php-blog
+    ports:
+      - "5001:80"
+    networks:
+      - ctf-network
+
+  # Lab 2: File Upload Application (Port 5002)
+  lab-2-file-upload:
+    build: ./lab-2-file-upload
+    ports:
+      - "5002:80"
+    networks:
+      - ctf-network
+
+  # Lab 3: IDOR Lab Application (Port 5003)
+  lab-3-idor:
+    build: ./lab-3-idor
+    ports:
+      - "5003:80"
+    networks:
+      - ctf-network
+
+  # Lab 4: SQL Injection Lab Application (Port 5004)
+  lab-4-sqli:
+    build: ./lab-4-sqli
+    ports:
+      - "5004:80"
+    depends_on:
+      - db
+    networks:
+      - ctf-network
+
+  # Lab 5: Advanced XSS Challenge (Port 5005)
+  lab-5-xss:
+    build: ./lab-5-xss
+    ports:
+      - "5005:80"
+    networks:
+      - ctf-network
+
+  # Lab 6: SSRF Challenge (Port 5006)
+  lab-6-ssrf:
+    build: ./lab-6-ssrf
+    ports:
+      - "5006:80"
+    networks:
+      - ctf-network
+
+  # Lab 7: Deserialization Challenge (Port 5007)
+  lab-7-deserialization:
+    build: ./lab-7-deserialization
+    ports:
+      - "5007:80"
+    networks:
+      - ctf-network
+
+  # Lab 8: Race Condition Challenge (Port 5008)
+  lab-8-race-condition:
+    build: ./lab-8-race-condition
+    ports:
+      - "5008:80"
+    networks:
+      - ctf-network
+
+  # Lab 9: Advanced SQLi Challenge (Port 5009)
+  lab-9-advanced-sqli:
+    build: ./lab-9-advanced-sqli
+    ports:
+      - "5009:80"
+    depends_on:
+      - db
+    networks:
+      - ctf-network
+
+  # MySQL Database for Labs 4 and 9
+  db:
+    image: mysql:8.0
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_DATABASE: sqli_lab
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+    networks:
+      - ctf-network
+
+volumes:
+  mysql_data:
+
+networks:
+  ctf-network:
+    driver: bridge

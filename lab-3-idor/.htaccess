@@ -1,0 +1,7 @@
+RewriteEngine On
+
+# Route /download/{id} to download.php?id={id}
+RewriteRule ^download/([0-9]+)/?$ download.php?id=$1 [L,QSA]
+
+# Route /download/{id}.{ext} to download.php?id={id}
+RewriteRule ^download/([0-9]+)\.([a-zA-Z0-9]+)/?$ download.php?id=$1 [L,QSA]
